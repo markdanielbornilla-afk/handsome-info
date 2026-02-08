@@ -50,7 +50,7 @@
       color: #333;
     }
 
-    input {
+    input, select, textarea {
       width: 100%;
       padding: 10px;
       margin-bottom: 14px;
@@ -59,7 +59,7 @@
       font-size: 0.9rem;
     }
 
-    input:focus {
+    input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #a6c1ee;
     }
@@ -103,8 +103,8 @@
   <!-- Password Overlay -->
   <div id="lock" style="position:fixed;inset:0;background:linear-gradient(135deg,#fbc2eb,#a6c1ee);display:flex;align-items:center;justify-content:center;z-index:9999;">
     <div style="background:#fff;padding:22px;border-radius:18px;max-width:360px;width:90%;box-shadow:0 10px 25px rgba(0,0,0,.15);text-align:center;">
-      <!-- Embedded Base64 Image -->
-      <img src="data:image/png;base64,https://www.google.com/imgres?q=kawai%20anime%20goth&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D358653877051342&imgrefurl=https%3A%2F%2Fwww.facebook.com%2Fgroups%2F6382309425167339%2Fposts%2F7347471231984482%2F&docid=dUR0wno1RTg_iM&tbnid=W-zzXGj8qFtpFM&vet=12ahUKEwjepOvk7MiSAxXdkq8BHc2ND3wQnPAOegQIaBAB..i&w=960&h=960&hcb=2&ved=2ahUKEwjepOvk7MiSAxXdkq8BHc2ND3wQnPAOegQIaBAB==" 
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" 
       alt="cute anime" style="width:100%;border-radius:14px;margin-bottom:10px;" />
       <h2 style="margin:6px 0;">Locked 🔒</h2>
       <p style="font-size:.9rem;color:#555;">Enter the password to continue</p>
@@ -122,35 +122,34 @@
     </p>
 
     <form action="https://formspree.io/f/mjgevjzy" method="POST" onsubmit="showThanks(event)">
-      <label>Name</label>
-      <input type="text" name="name" placeholder="Your name" required />
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required />
 
-      <label>Age</label>
-      <input type="number" name="age" placeholder="Your age" required />
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" placeholder="Your age" required />
 
-      <label>Birthday</label>
-      <input type="date" name="birthday" required />
+      <label for="birthday">Birthday</label>
+      <input type="date" id="birthday" name="birthday" required />
 
-      <label>Hobbies</label>
-      <input type="text" name="hobbies" placeholder="What do you like to do?" />
+      <label for="hobbies">Hobbies</label>
+      <input type="text" id="hobbies" name="hobbies" placeholder="What do you like to do?" />
 
-      <label>If you were an animal, what would you be?</label>
-      <input type="text" name="animal" placeholder="Animal" />
+      <label for="animal">If you were an animal, what would you be?</label>
+      <input type="text" id="animal" name="animal" placeholder="Animal" />
 
-      <label>Favorite Food</label>
-      <input type="text" name="favorite_food" placeholder="Favorite food" />
+      <label for="favorite_food">Favorite Food</label>
+      <input type="text" id="favorite_food" name="favorite_food" placeholder="Favorite food" />
 
-      <label>Favorite Color</label>
-      <input type="text" name="favorite_color" placeholder="Favorite color" />
+      <label for="favorite_color">Favorite Color</label>
+      <input type="text" id="favorite_color" name="favorite_color" placeholder="Favorite color" />
 
-      <label for="address">Address:</label>
+      <label for="address">Address</label>
       <input type="text" id="address" name="address" required placeholder="Enter your address" />
 
-      <label for="number">Phone Number (optional):</label>
+      <label for="number">Phone Number (optional)</label>
       <input type="tel" id="number" name="number" placeholder="Enter your number" />
 
-
-      <label for="religion">Religion:</label>
+      <label for="religion">Religion</label>
       <select id="religion" name="religion" required>
         <option value="">--Select Religion--</option>
         <option value="Christianity">Christianity</option>
@@ -158,14 +157,13 @@
         <option value="Hinduism">Hinduism</option>
         <option value="Buddhism">Buddhism</option>
         <option value="Other">Other</option>
-    </select>
+      </select>
 
-      <label for="tips">Tips for your husband for events:</label>
+      <label for="tips">Tips for your husband for events</label>
       <textarea id="tips" name="tips" rows="4" placeholder="Enter your tips..."></textarea>
 
-
-      <label>Favorite Thing to Do</label>
-      <input type="text" name="favorite_thing" placeholder="Favorite activity" />
+      <label for="favorite_thing">Favorite Thing to Do</label>
+      <input type="text" id="favorite_thing" name="favorite_thing" placeholder="Favorite activity" />
 
       <button type="submit">Submit</button>
     </form>
@@ -194,20 +192,22 @@
   function showThanks(e) {
     e.preventDefault();
     const form = e.target;
-    fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }})
-      .then(() => {
-        document.querySelector('.card').innerHTML = `
-          <!-- Embedded Base64 Image in Thank You Screen -->
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+    fetch(form.action, { 
+      method: 'POST', 
+      body: new FormData(form), 
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(() => {
+      document.querySelector('.card').innerHTML = `
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
 //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" 
-          style="width:100%;border-radius:14px;margin-bottom:12px;" alt="cute anime" />
-          <h1>Thank you, handsome 💖</h1>
-          <p>Your answers have been sent safely ✨</p>
-        `;
-      })
-      .catch(() => alert('Something went wrong. Try again later.'));
+        style="width:100%;border-radius:14px;margin-bottom:12px;" alt="cute anime" />
+        <h1>Thank you, handsome 💖</h1>
+        <p>Your answers have been sent safely ✨</p>
+      `;
+    })
+    .catch(() => alert('Something went wrong. Try again later.'));
   }
 </script>
 </body>
 </html>
-
